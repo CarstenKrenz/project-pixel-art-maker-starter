@@ -1,35 +1,36 @@
 let colorPicker = document.querySelector("#colorPicker").value;
-let gameTable   = document.getElementById("pixelCanvas"),pixels;
+let pixelCanvas = document.getElementById("pixelCanvas");
 
 function makeGrid(height, width) {
     for (let i = 0; i < height; i++) {
-        let tableRow = document.createElement("tr");
+        let tr = document.createElement("tr");
 
-        for (let j = 0; j < width; j++) {
-            let tableCell = document.createElement("td");
-            tableRow.appendChild(tableCell);
+        for (let i = 0; i < width; i++) {
+            let td = document.createElement("td");
+            tr.appendChild(td);
         }
-        gameTable.appendChild(tableRow);
+        pixelCanvas.appendChild(tr);
     }
 }
 
-function colorPixel(e){
+function colorPickerFct(element){
     colorPicker = document.querySelector("#colorPicker").value;
-    e.target.style.backgroundColor = colorPicker;
+    element.target.style.backgroundColor = colorPicker;
 }
 
-var start = document.getElementById('sizePicker');
-    start.addEventListener('submit', function(e){
-    e.preventDefault();
-    document.getElementById("pixelCanvas").innerHTML = "";
+var initGrid = document.getElementById('sizePicker');
+initGrid.addEventListener('submit', function(e){
+e.preventDefault();
+document.getElementById("pixelCanvas").innerHTML = "";
 
-    let gridHeight = document.getElementById("inputHeight").value;
-    let gridWidth = document.getElementById("inputWidth").value;
-    makeGrid(gridHeight, gridWidth);
+let gridHeight = document.getElementById("inputHeight").value;
+let gridWidth = document.getElementById("inputWidth").value;
 
-    var pixels = document.querySelectorAll('td');
+makeGrid(gridHeight, gridWidth);
+
+var pixels = document.querySelectorAll('td');
 
     for (var i = 0; i < pixels.length; i++) {
-        pixels[i].addEventListener('click', colorPixel, false);
+        pixels[i].addEventListener('click', colorPickerFct, false);
     }
 });
